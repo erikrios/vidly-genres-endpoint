@@ -21,7 +21,22 @@ app.get('/api/genres/:id', (req, res) => {
     res.send(genre);
 });
 
-function validateCourse(genre) {
+app.post('api/genres', (req, res) => {
+    const { error } = validateGenre(req.body);
+    if (error) {
+        // 400 Bad Request
+        return res.status(400).send(error.details[0].message);
+    }
+
+    const genre = {
+        id: genres.length + 1,
+        name: req.body.name
+    };
+    genres.push(genre);
+    res.send(genres);
+});
+
+function validateGenre(genre) {
     const schema = {
         name: Joi.string().min(3).required()
     };
