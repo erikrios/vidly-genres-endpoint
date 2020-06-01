@@ -21,7 +21,7 @@ app.get('/api/genres/:id', (req, res) => {
     res.send(genre);
 });
 
-app.post('api/genres', (req, res) => {
+app.post('/api/genres', (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) {
         // 400 Bad Request
