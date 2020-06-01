@@ -21,6 +21,14 @@ app.get('/api/genres/:id', (req, res) => {
     res.send(genre);
 });
 
+function validateCourse(genre) {
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+
+    return Joi.validate(genre, schema);
+}
+
 app.listen(PORT, () => {
     console.log(`The server running on: ${PORT}...`);
 })
